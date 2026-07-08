@@ -57,9 +57,7 @@ def create_chat_tab() -> None:
         height=480,
         elem_classes=["chatbot"],
         show_label=False,
-        bubble_full_width=False,
         avatar_images=(None, None),
-        type="messages",
     )
 
     # Input area
@@ -77,7 +75,7 @@ def create_chat_tab() -> None:
     # Suggested questions
     gr.HTML("""
     <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
-        <span style="color: #6a6a80; font-size: 12px; display: flex; align-items: center;">💡 Try:</span>
+        <span style="color: var(--sb-text-muted); font-size: 12px; display: flex; align-items: center;">💡 Try:</span>
     </div>
     """)
     with gr.Row():

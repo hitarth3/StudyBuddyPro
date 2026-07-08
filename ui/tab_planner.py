@@ -25,7 +25,7 @@ def create_planner_tab() -> None:
     <div class="section-header">
         <h3>📅 Study Planner</h3>
     </div>
-    <p style="color: #a0a0b8; font-size: 14px; margin-bottom: 16px;">
+    <p style="color: var(--sb-text-secondary); font-size: 14px; margin-bottom: 16px;">
         Generate a personalized study schedule with daily plans, revision timetable, and mock test schedule.
     </p>
     """)

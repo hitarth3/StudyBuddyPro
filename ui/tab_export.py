@@ -24,7 +24,7 @@ def create_export_tab() -> None:
     <div class="section-header">
         <h3>💾 Export Center</h3>
     </div>
-    <p style="color: #a0a0b8; font-size: 14px; margin-bottom: 16px;">
+    <p style="color: var(--sb-text-secondary); font-size: 14px; margin-bottom: 16px;">
         Export your quizzes, flashcards, study plans, and revision notes as Markdown files.
     </p>
     """)
@@ -34,10 +34,10 @@ def create_export_tab() -> None:
         # Quiz export
         with gr.Column():
             gr.HTML("""
-            <div style="background: #1a1a2e; border: 1px solid #2a2a45; border-radius: 16px; padding: 24px;">
+            <div style="background: var(--sb-bg-card); border: 1px solid var(--sb-border); border-radius: 16px; padding: 24px;">
                 <div style="font-size: 28px; margin-bottom: 8px;">📝</div>
-                <h4 style="color: #e8e8f0; margin-bottom: 8px;">Quiz History</h4>
-                <p style="color: #a0a0b8; font-size: 13px;">Export all your past quizzes with answers and explanations.</p>
+                <h4 style="color: var(--sb-text-primary); margin-bottom: 8px;">Quiz History</h4>
+                <p style="color: var(--sb-text-secondary); font-size: 13px;">Export all your past quizzes with answers and explanations.</p>
             </div>
             """)
             export_quiz_btn = gr.Button("Export Quizzes", elem_classes=["secondary-btn"], size="sm")
@@ -46,10 +46,10 @@ def create_export_tab() -> None:
         # Flashcards export
         with gr.Column():
             gr.HTML("""
-            <div style="background: #1a1a2e; border: 1px solid #2a2a45; border-radius: 16px; padding: 24px;">
+            <div style="background: var(--sb-bg-card); border: 1px solid var(--sb-border); border-radius: 16px; padding: 24px;">
                 <div style="font-size: 28px; margin-bottom: 8px;">🃏</div>
-                <h4 style="color: #e8e8f0; margin-bottom: 8px;">Flashcard Sets</h4>
-                <p style="color: #a0a0b8; font-size: 13px;">Export your generated flashcard sets for offline review.</p>
+                <h4 style="color: var(--sb-text-primary); margin-bottom: 8px;">Flashcard Sets</h4>
+                <p style="color: var(--sb-text-secondary); font-size: 13px;">Export your generated flashcard sets for offline review.</p>
             </div>
             """)
             export_fc_btn = gr.Button("Export Flashcards", elem_classes=["secondary-btn"], size="sm")
@@ -58,10 +58,10 @@ def create_export_tab() -> None:
         # Study plans export
         with gr.Column():
             gr.HTML("""
-            <div style="background: #1a1a2e; border: 1px solid #2a2a45; border-radius: 16px; padding: 24px;">
+            <div style="background: var(--sb-bg-card); border: 1px solid var(--sb-border); border-radius: 16px; padding: 24px;">
                 <div style="font-size: 28px; margin-bottom: 8px;">📅</div>
-                <h4 style="color: #e8e8f0; margin-bottom: 8px;">Study Plans</h4>
-                <p style="color: #a0a0b8; font-size: 13px;">Export your personalized study schedules.</p>
+                <h4 style="color: var(--sb-text-primary); margin-bottom: 8px;">Study Plans</h4>
+                <p style="color: var(--sb-text-secondary); font-size: 13px;">Export your personalized study schedules.</p>
             </div>
             """)
             export_plan_btn = gr.Button("Export Plans", elem_classes=["secondary-btn"], size="sm")

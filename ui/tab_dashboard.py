@@ -40,25 +40,25 @@ def create_dashboard_tab() -> None:
 
     with gr.Row():
         with gr.Column(scale=1):
-            gr.HTML('<div style="color: #e8e8f0; font-weight: 600; margin-bottom: 8px;">📈 Quiz Scores Over Time</div>')
+            gr.HTML('<div style="color: var(--sb-text-primary); font-weight: 600; margin-bottom: 8px;">📈 Quiz Scores Over Time</div>')
             scores_chart = gr.Plot(value=_build_scores_chart(), elem_id="scores-chart")
 
         with gr.Column(scale=1):
-            gr.HTML('<div style="color: #e8e8f0; font-weight: 600; margin-bottom: 8px;">🎯 Topic Accuracy</div>')
+            gr.HTML('<div style="color: var(--sb-text-primary); font-weight: 600; margin-bottom: 8px;">🎯 Topic Accuracy</div>')
             accuracy_chart = gr.Plot(value=_build_accuracy_chart(), elem_id="accuracy-chart")
 
     with gr.Row():
         with gr.Column(scale=1):
-            gr.HTML('<div style="color: #e8e8f0; font-weight: 600; margin-top: 16px; margin-bottom: 8px;">🧠 Topic Strength Analysis</div>')
+            gr.HTML('<div style="color: var(--sb-text-primary); font-weight: 600; margin-top: 16px; margin-bottom: 8px;">🧠 Topic Strength Analysis</div>')
             weak_topics_display = gr.HTML(value=_render_weak_topics(), elem_id="weak-topics")
         with gr.Column(scale=1):
-            gr.HTML('<div style="color: #e8e8f0; font-weight: 600; margin-top: 16px; margin-bottom: 8px;">📅 Daily Study Activity</div>')
+            gr.HTML('<div style="color: var(--sb-text-primary); font-weight: 600; margin-top: 16px; margin-bottom: 8px;">📅 Daily Study Activity</div>')
             activity_display = gr.HTML(value=_render_activity(), elem_id="activity-display")
 
     # Quick Actions / Guide
     gr.HTML("""
     <div style="margin: 24px 0 12px 0;">
-        <h3 style="font-size: 18px; font-weight: 700; color: #e8e8f0; margin-bottom: 16px;">
+        <h3 style="font-size: 18px; font-weight: 700; color: var(--sb-text-primary); margin-bottom: 16px;">
             🚀 Quick Start Guide
         </h3>
     </div>
@@ -69,8 +69,8 @@ def create_dashboard_tab() -> None:
         <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.06));
                     border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 16px; padding: 24px;">
             <div style="font-size: 28px; margin-bottom: 12px;">📤</div>
-            <h4 style="color: #e8e8f0; font-weight: 700; margin-bottom: 8px;">1. Upload Material</h4>
-            <p style="color: #a0a0b8; font-size: 14px; line-height: 1.6;">
+            <h4 style="color: var(--sb-text-primary); font-weight: 700; margin-bottom: 8px;">1. Upload Material</h4>
+            <p style="color: var(--sb-text-secondary); font-size: 14px; line-height: 1.6;">
                 Upload your PDFs, DOCX, or TXT study files. We'll process and index them for AI-powered learning.
             </p>
         </div>
@@ -79,8 +79,8 @@ def create_dashboard_tab() -> None:
         <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.06));
                     border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 16px; padding: 24px;">
             <div style="font-size: 28px; margin-bottom: 12px;">💬</div>
-            <h4 style="color: #e8e8f0; font-weight: 700; margin-bottom: 8px;">2. Ask Questions</h4>
-            <p style="color: #a0a0b8; font-size: 14px; line-height: 1.6;">
+            <h4 style="color: var(--sb-text-primary); font-weight: 700; margin-bottom: 8px;">2. Ask Questions</h4>
+            <p style="color: var(--sb-text-secondary); font-size: 14px; line-height: 1.6;">
                 Chat with your notes. Get answers with citations, explanations at any level, and follow-up discussions.
             </p>
         </div>
@@ -89,8 +89,8 @@ def create_dashboard_tab() -> None:
         <div style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.06));
                     border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 16px; padding: 24px;">
             <div style="font-size: 28px; margin-bottom: 12px;">📝</div>
-            <h4 style="color: #e8e8f0; font-weight: 700; margin-bottom: 8px;">3. Test Yourself</h4>
-            <p style="color: #a0a0b8; font-size: 14px; line-height: 1.6;">
+            <h4 style="color: var(--sb-text-primary); font-weight: 700; margin-bottom: 8px;">3. Test Yourself</h4>
+            <p style="color: var(--sb-text-secondary); font-size: 14px; line-height: 1.6;">
                 Generate quizzes, flashcards, and revision notes. Track your progress and identify weak areas.
             </p>
         </div>
@@ -299,7 +299,7 @@ def _render_activity() -> str:
                     background: rgba(99, 102, 241, {intensity / 100});
                     border: 1px solid rgba(99, 102, 241, 0.2);
                     display: flex; align-items: center; justify-content: center;
-                    font-size: 10px; color: #e8e8f0;"
+                    font-size: 10px; color: var(--sb-text-primary);"
              title="{date_str}: {count} activities">
             {count}
         </div>

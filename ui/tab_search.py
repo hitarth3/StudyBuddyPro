@@ -22,7 +22,7 @@ def create_search_tab() -> None:
     <div class="section-header">
         <h3>🔍 Search Documents</h3>
     </div>
-    <p style="color: #a0a0b8; font-size: 14px; margin-bottom: 16px;">
+    <p style="color: var(--sb-text-secondary); font-size: 14px; margin-bottom: 16px;">
         Search through your uploaded study material by keyword, topic, or document.
     </p>
     """)
@@ -82,8 +82,8 @@ def create_search_tab() -> None:
             )
 
         html_parts = [
-            f'<div style="color: #a0a0b8; font-size: 13px; margin-bottom: 16px;">'
-            f'Found {len(results)} results for "<strong style="color: #e8e8f0;">{query}</strong>"</div>'
+            f'<div style="color: var(--sb-text-secondary); font-size: 13px; margin-bottom: 16px;">'
+            f'Found {len(results)} results for "<strong style="color: var(--sb-text-primary);">{query}</strong>"</div>'
         ]
 
         for i, doc_result in enumerate(results, 1):
@@ -98,7 +98,7 @@ def create_search_tab() -> None:
                     import re
                     pattern = re.compile(re.escape(term), re.IGNORECASE)
                     highlighted = pattern.sub(
-                        f'<mark style="background: rgba(99, 102, 241, 0.25); color: #e8e8f0; '
+                        f'<mark style="background: rgba(99, 102, 241, 0.25); color: var(--sb-text-primary); '
                         f'padding: 1px 4px; border-radius: 3px;">{term}</mark>',
                         highlighted
                     )
@@ -109,7 +109,7 @@ def create_search_tab() -> None:
                     <strong style="color: #818cf8;">[{i}] {source}</strong>
                     <span class="badge badge-info">Page {page}</span>
                 </div>
-                <p style="color: #a0a0b8; font-size: 14px; line-height: 1.7; margin: 0;">
+                <p style="color: var(--sb-text-secondary); font-size: 14px; line-height: 1.7; margin: 0;">
                     {highlighted}
                 </p>
             </div>

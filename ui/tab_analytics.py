@@ -33,11 +33,11 @@ def create_analytics_tab() -> None:
     # Charts
     with gr.Row():
         with gr.Column(scale=1):
-            gr.HTML('<div style="color: #e8e8f0; font-weight: 600; margin-bottom: 8px;">📈 Quiz Scores Over Time</div>')
+            gr.HTML('<div style="color: var(--sb-text-primary); font-weight: 600; margin-bottom: 8px;">📈 Quiz Scores Over Time</div>')
             scores_chart = gr.Plot(value=_build_scores_chart(), elem_id="scores-chart")
 
         with gr.Column(scale=1):
-            gr.HTML('<div style="color: #e8e8f0; font-weight: 600; margin-bottom: 8px;">🎯 Topic Accuracy</div>')
+            gr.HTML('<div style="color: var(--sb-text-primary); font-weight: 600; margin-bottom: 8px;">🎯 Topic Accuracy</div>')
             accuracy_chart = gr.Plot(value=_build_accuracy_chart(), elem_id="accuracy-chart")
 
     # Weak topics analysis
@@ -176,33 +176,33 @@ def _render_weak_topics() -> str:
     html = '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">'
 
     # Weak topics
-    html += '<div style="background: #1a1a2e; border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 16px; padding: 20px;">'
+    html += '<div style="background: var(--sb-bg-card); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 16px; padding: 20px;">'
     html += '<h4 style="color: #ef4444; margin-bottom: 12px;">⚠️ Weak Topics</h4>'
     if data["weak"]:
-        for t in data["weak"]:
-            html += f"""
-            <div style="display: flex; justify-content: space-between; padding: 8px 0;
-                        border-bottom: 1px solid rgba(239, 68, 68, 0.1);">
-                <span style="color: #e8e8f0;">{t['topic']}</span>
-                <span class="badge badge-error">{t['accuracy']:.0f}%</span>
-            </div>
-            """
+         for t in data["weak"]:
+             html += f"""
+             <div style="display: flex; justify-content: space-between; padding: 8px 0;
+                         border-bottom: 1px solid rgba(239, 68, 68, 0.1);">
+                 <span style="color: var(--sb-text-primary);">{t['topic']}</span>
+                 <span class="badge badge-error">{t['accuracy']:.0f}%</span>
+             </div>
+             """
     else:
         html += '<p style="color: #6a6a80; font-size: 14px;">No weak topics! Great job! 🎉</p>'
     html += '</div>'
 
     # Strong topics
-    html += '<div style="background: #1a1a2e; border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 16px; padding: 20px;">'
+    html += '<div style="background: var(--sb-bg-card); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 16px; padding: 20px;">'
     html += '<h4 style="color: #22c55e; margin-bottom: 12px;">✅ Strong Topics</h4>'
     if data["strong"]:
-        for t in data["strong"]:
-            html += f"""
-            <div style="display: flex; justify-content: space-between; padding: 8px 0;
-                        border-bottom: 1px solid rgba(34, 197, 94, 0.1);">
-                <span style="color: #e8e8f0;">{t['topic']}</span>
-                <span class="badge badge-success">{t['accuracy']:.0f}%</span>
-            </div>
-            """
+         for t in data["strong"]:
+             html += f"""
+             <div style="display: flex; justify-content: space-between; padding: 8px 0;
+                         border-bottom: 1px solid rgba(34, 197, 94, 0.1);">
+                 <span style="color: var(--sb-text-primary);">{t['topic']}</span>
+                 <span class="badge badge-success">{t['accuracy']:.0f}%</span>
+             </div>
+             """
     else:
         html += '<p style="color: #6a6a80; font-size: 14px;">Take quizzes to identify strong topics.</p>'
     html += '</div>'
@@ -230,7 +230,7 @@ def _render_activity() -> str:
                     background: rgba(99, 102, 241, {intensity / 100});
                     border: 1px solid rgba(99, 102, 241, 0.2);
                     display: flex; align-items: center; justify-content: center;
-                    font-size: 10px; color: #e8e8f0;"
+                    font-size: 10px; color: var(--sb-text-primary);"
              title="{date_str}: {count} activities">
             {count}
         </div>

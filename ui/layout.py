@@ -28,51 +28,81 @@ log = get_logger(__name__)
 _DARK_MODE_JS = """
 function() {
     const url = new URL(window.location);
-    if (!url.searchParams.get('__theme')) {
-        url.searchParams.set('__theme', 'dark');
-        window.location.href = url.href;
+    const savedTheme = localStorage.getItem('sb-theme') ||
+                       url.searchParams.get('__theme') || 'dark';
+
+    // Set the query param so Gradio reads it during initialization
+    if (url.searchParams.get('__theme') !== savedTheme) {
+        url.searchParams.set('__theme', savedTheme);
+        window.history.replaceState({}, '', url.toString());
     }
+
+    const isDark = savedTheme === 'dark';
     
-    // Set initial toggle button text
+    // Apply classes immediately
+    if (isDark) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+    }
+
+    // Sync button and container after Gradio loads
     setTimeout(() => {
-        const isDark = document.querySelector('.gradio-container')?.classList.contains('dark') || 
-                       document.body.classList.contains('dark') ||
-                       url.searchParams.get('__theme') === 'dark';
-        const themeBtn = document.querySelector('#theme-toggle-btn button') || document.querySelector('#theme-toggle-btn');
-        if (themeBtn) {
-            themeBtn.innerText = isDark ? '☀️' : '🌙';
+        const container = document.querySelector('.gradio-container');
+        if (container) {
+            container.classList.toggle('dark', isDark);
         }
-    }, 400);
+        const themeBtn = document.querySelector('#theme-toggle-btn button') ||
+                         document.querySelector('#theme-toggle-btn');
+        if (themeBtn) themeBtn.innerText = isDark ? '☀️' : '🌙';
+    }, 200);
+
+    // Poll to remove footer from DOM completely
+    const removeFooter = () => {
+        const footer = document.querySelector('footer');
+        if (footer) {
+            footer.remove();
+            return true;
+        }
+        return false;
+    };
+    if (!removeFooter()) {
+        const interval = setInterval(() => {
+            if (removeFooter()) clearInterval(interval);
+        }, 50);
+        setTimeout(() => clearInterval(interval), 5000);
+    }
 }
 """
 
 _THEME_TOGGLE_JS = """
 () => {
-    const container = document.querySelector('.gradio-container');
-    const body = document.body;
-    const themeBtn = document.querySelector('#theme-toggle-btn button') || document.querySelector('#theme-toggle-btn');
+    const root = document.documentElement;
+    const isDark = root.classList.toggle('dark');
     
+    // Toggle on body
+    document.body.classList.toggle('dark', isDark);
+    
+    // Toggle on Gradio container
+    const container = document.querySelector('.gradio-container');
     if (container) {
-        container.classList.toggle('dark');
-        body.classList.toggle('dark');
-        const isDark = container.classList.contains('dark');
-        if (themeBtn) {
-            themeBtn.innerText = isDark ? '☀️' : '🌙';
-        }
-        const url = new URL(window.location);
-        url.searchParams.set('__theme', isDark ? 'dark' : 'light');
-        window.history.replaceState({}, '', url.toString());
-    } else {
-        body.classList.toggle('dark');
-        document.documentElement.classList.toggle('dark');
-        const isDark = body.classList.contains('dark');
-        if (themeBtn) {
-            themeBtn.innerText = isDark ? '☀️' : '🌙';
-        }
-        const url = new URL(window.location);
-        url.searchParams.set('__theme', isDark ? 'dark' : 'light');
-        window.history.replaceState({}, '', url.toString());
+        container.classList.toggle('dark', isDark);
     }
+
+    // Persist choice
+    localStorage.setItem('sb-theme', isDark ? 'dark' : 'light');
+
+    // Update URL param
+    const url = new URL(window.location);
+    url.searchParams.set('__theme', isDark ? 'dark' : 'light');
+    window.history.replaceState({}, '', url.toString());
+
+    // Update button emoji
+    const themeBtn = document.querySelector('#theme-toggle-btn button') ||
+                     document.querySelector('#theme-toggle-btn');
+    if (themeBtn) themeBtn.innerText = isDark ? '☀️' : '🌙';
 }
 """
 
@@ -83,9 +113,6 @@ def build_app() -> gr.Blocks:
     theme = get_theme()
 
     with gr.Blocks(
-        theme=theme,
-        css=CUSTOM_CSS,
-        js=_DARK_MODE_JS,
         title="StudyBuddy Pro — AI Study Assistant",
         analytics_enabled=False,
     ) as app:
@@ -161,14 +188,7 @@ def build_app() -> gr.Blocks:
             with gr.Tab("📚 Revision", id="revision"):
                 create_revision_tab()
 
-        # --- Footer ---
-        gr.HTML("""
-        <div style="text-align: center; padding: 24px; margin-top: 32px;
-                    border-top: 1px solid #2a2a45; color: #6a6a80; font-size: 13px;">
-            <p>StudyBuddy Pro v1.0 • Built with ❤️ using Gradio, LangChain & Groq</p>
-            <p style="margin-top: 4px;">Powered by Llama 3.3 70B • HuggingFace Embeddings • ChromaDB</p>
-        </div>
-        """)
+
 
     log.info("Application UI built successfully")
-    return app
+    return app, theme

@@ -12,9 +12,9 @@ import shutil
 from pathlib import Path
 from typing import BinaryIO
 
-import fitz  # PyMuPDF
+from pypdf import PdfReader  # pure-Python PDF library (replaces PyMuPDF)
 from docx import Document as DocxDocument
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from config.settings import settings
@@ -126,18 +126,20 @@ class DocumentProcessor:
         return chunks, file_info
 
     def _process_pdf(self, file_path: Path) -> tuple[str, int, list[dict]]:
-        """Extract text from PDF using PyMuPDF."""
+        """Extract text from PDF using pypdf (pure-Python, no native DLLs)."""
         try:
-            doc = fitz.open(str(file_path))
+            reader = PdfReader(str(file_path))
         except Exception as e:
             raise DocumentProcessingError(f"Cannot open PDF: {e}")
 
         page_texts = []
         all_text_parts = []
 
-        for page_num in range(len(doc)):
-            page = doc[page_num]
-            text = page.get_text("text")
+        for page_num, page in enumerate(reader.pages):
+            try:
+                text = page.extract_text() or ""
+            except Exception:
+                text = ""
             if text.strip():
                 page_texts.append({
                     "page": page_num + 1,
@@ -145,8 +147,7 @@ class DocumentProcessor:
                 })
                 all_text_parts.append(text)
 
-        page_count = len(doc)
-        doc.close()
+        page_count = len(reader.pages)
 
         if not all_text_parts:
             raise DocumentProcessingError(

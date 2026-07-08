@@ -23,7 +23,7 @@ def create_summary_tab() -> None:
     <div class="section-header">
         <h3>📄 AI Summary Generator</h3>
     </div>
-    <p style="color: #a0a0b8; font-size: 14px; margin-bottom: 16px;">
+    <p style="color: var(--sb-text-secondary); font-size: 14px; margin-bottom: 16px;">
         Generate summaries of your study material in various formats.
     </p>
     """)

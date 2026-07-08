@@ -205,7 +205,7 @@ def _render_card(cards: list[dict], idx: int, flipped: bool) -> str:
                     text-transform: uppercase; letter-spacing: 1px;">
             {label}
         </div>
-        <div style="font-size: 20px; line-height: 1.6; color: #e8e8f0; font-weight: 500;
+        <div style="font-size: 20px; line-height: 1.6; color: var(--sb-text-primary); font-weight: 500;
                     max-width: 500px;">
             {content}
         </div>
@@ -223,10 +223,10 @@ def _render_progress(idx: int, total: int) -> str:
     pct = ((idx + 1) / total) * 100
     return f"""
     <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
-        <span style="color: #a0a0b8; font-size: 14px; font-weight: 600;">
+        <span style="color: var(--sb-text-secondary); font-size: 14px; font-weight: 600;">
             Card {idx + 1} of {total}
         </span>
-        <div style="flex: 1; height: 6px; background: #16162a; border-radius: 3px; overflow: hidden;">
+        <div style="flex: 1; height: 6px; background: var(--sb-bg-input); border-radius: 3px; overflow: hidden;">
             <div style="width: {pct:.0f}%; height: 100%; background: linear-gradient(135deg, #6366f1, #8b5cf6);
                         border-radius: 3px; transition: width 0.3s ease;"></div>
         </div>

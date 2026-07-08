@@ -31,7 +31,7 @@ def create_upload_tab() -> None:
         <span class="badge badge-primary">PDF</span>
         <span class="badge badge-primary">DOCX</span>
         <span class="badge badge-primary">TXT</span>
-        <span style="color: #6a6a80; font-size: 13px; display: flex; align-items: center;">
+        <span style="color: var(--sb-text-muted); font-size: 13px; display: flex; align-items: center;">
             Max 50MB per file
         </span>
     </div>
@@ -165,19 +165,19 @@ def _render_store_stats() -> str:
     """Render vector store statistics."""
     stats = vector_store.get_stats()
     return f"""
-    <div style="background: #1a1a2e; border: 1px solid #2a2a45; border-radius: 12px;
+    <div style="background: var(--sb-bg-card); border: 1px solid var(--sb-border); border-radius: 12px;
                 padding: 16px; margin-top: 16px;">
         <div style="display: flex; gap: 24px; flex-wrap: wrap;">
             <div>
-                <span style="color: #6a6a80; font-size: 12px;">Total Documents</span>
-                <div style="color: #e8e8f0; font-weight: 700; font-size: 20px;">{stats['total_documents']}</div>
+                <span style="color: var(--sb-text-muted); font-size: 12px;">Total Documents</span>
+                <div style="color: var(--sb-text-primary); font-weight: 700; font-size: 20px;">{stats['total_documents']}</div>
             </div>
             <div>
-                <span style="color: #6a6a80; font-size: 12px;">Total Chunks</span>
-                <div style="color: #e8e8f0; font-weight: 700; font-size: 20px;">{stats['total_chunks']}</div>
+                <span style="color: var(--sb-text-muted); font-size: 12px;">Total Chunks</span>
+                <div style="color: var(--sb-text-primary); font-weight: 700; font-size: 20px;">{stats['total_chunks']}</div>
             </div>
             <div>
-                <span style="color: #6a6a80; font-size: 12px;">Status</span>
+                <span style="color: var(--sb-text-muted); font-size: 12px;">Status</span>
                 <div style="font-size: 14px;">
                     {'<span class="badge badge-success">Ready</span>' if stats['total_chunks'] > 0
                      else '<span class="badge badge-warning">Empty</span>'}

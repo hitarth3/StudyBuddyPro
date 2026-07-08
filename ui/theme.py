@@ -65,7 +65,8 @@ class StudyBuddyTheme(Base):
             button_secondary_background_fill_dark="*neutral_800",
             button_secondary_text_color="*neutral_700",
             button_secondary_text_color_dark="*neutral_200",
-            button_shadow="0 2px 4px rgba(0, 0, 0, 0.2)",
+            button_primary_shadow="0 2px 4px rgba(0, 0, 0, 0.2)",
+            button_secondary_shadow="0 1px 3px rgba(0, 0, 0, 0.1)",
 
             # Inputs
             input_background_fill="*neutral_50",

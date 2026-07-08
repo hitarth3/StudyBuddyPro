@@ -28,7 +28,7 @@ def create_quiz_tab() -> None:
 
     # --- Quiz Generation Panel ---
     with gr.Group():
-        gr.HTML('<div style="padding: 4px 0;"><strong style="color: #e8e8f0;">⚙️ Quiz Settings</strong></div>')
+        gr.HTML('<div style="padding: 4px 0;"><strong style="color: var(--sb-text-primary);">⚙️ Quiz Settings</strong></div>')
 
         with gr.Row():
             topic_input = gr.Textbox(
@@ -200,26 +200,26 @@ def _render_quiz(questions: list[dict]) -> str:
         html = f"""
         <div class="quiz-question">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <span style="font-weight: 700; color: #e8e8f0;">Question {qid}</span>
+                <span style="font-weight: 700; color: var(--sb-text-primary);">Question {qid}</span>
                 <div style="display: flex; gap: 6px;">
                     <span class="badge {type_color}">{type_badge}</span>
                     <span class="badge badge-warning">{difficulty}</span>
                 </div>
             </div>
-            <p style="color: #e8e8f0; font-size: 15px; line-height: 1.6; margin-bottom: 12px;">{question}</p>
+            <p style="color: var(--sb-text-primary); font-size: 15px; line-height: 1.6; margin-bottom: 12px;">{question}</p>
         """
 
         if q_type == "mcq" and q.get("options"):
             html += '<div style="display: flex; flex-direction: column; gap: 8px;">'
             for opt in q["options"]:
                 html += f"""
-                <div style="background: #16162a; border: 1px solid #2a2a45; border-radius: 8px;
-                            padding: 10px 14px; color: #a0a0b8; font-size: 14px; cursor: pointer;
+                <div style="background: var(--sb-bg-input); border: 1px solid var(--sb-border); border-radius: 8px;
+                            padding: 10px 14px; color: var(--sb-text-secondary); font-size: 14px; cursor: pointer;
                             transition: all 0.2s ease;">{opt}</div>
                 """
             html += '</div>'
 
-        html += f'<div style="margin-top: 8px; color: #6a6a80; font-size: 12px;">📌 Topic: {topic}</div>'
+        html += f'<div style="margin-top: 8px; color: var(--sb-text-muted); font-size: 12px;">📌 Topic: {topic}</div>'
         html += '</div>'
         html_parts.append(html)
 

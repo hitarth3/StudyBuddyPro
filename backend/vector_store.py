@@ -6,7 +6,7 @@ StudyBuddy Pro — Vector Store Manager
 Manages ChromaDB vector store with HuggingFace embeddings for semantic search.
 """
 
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
